@@ -4,7 +4,7 @@ bool DownPlane(double xd1,double yd1, double xd2, double yd2, double xd3, double
 
 int sign;
 
-if(hrs = 0 ) { sign = -1; } else {sign = 1; }
+if(hrs == 0 ) { sign = -1; } else {sign = 1; }
 
 double xmin[9] = { 0.082, 0.0862, 0.0989, 0.1084, 0.1195, 0.1236, 0.1326, 0.1958, 0.2149 };
 double xmax[9] = { 0.1256, 0.1318, 0.1505, 0.1643, 0.1798, 0.1853, 0.1975, 0.2777, 0.301 };

@@ -4,7 +4,7 @@ bool UpPlane(double xup1, double yup1, double xup2, double yup2, int hrs ){
 
 int sign;
 
-if(hrs = 0) { sign = -1; } else { sign = 1; }
+if(hrs == 0) { sign = -1; } else { sign = 1; }
 
 //Plane 1
 
