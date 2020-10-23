@@ -60,7 +60,7 @@ TH1F *asym_v = new TH1F("asym_v",Form("LHRS sim vertex Asymmetry Septum Detuend 
 //For simulation
 vector <double> Rate,Qsq,Asym,Lab, Mom;
 vector <double> Qsq_v, Asym_v, Lab_v, Rate_v;
-double thisRate,thisRate_v, thisTh, thisPh, thisQsq, thisXcol, thisYcol, thisXvdc, thisAsym, thisAng,thisCosAng;
+double thisRate, thisTh, thisPh, thisQsq, thisXcol, thisYcol, thisXvdc, thisAsym, thisAng,thisCosAng;
 double thisE,thisP, thismom;
 double thisxu1,thisxu2,thisyu1,thisyu2;
 double thisxd1,thisxd2,thisxd3,thisxd4,thisxd5,thisxd6,thisxd7,thisxd8,thisxd9;
@@ -184,7 +184,7 @@ double thisEvt;
   Mom.push_back(thismom/1000);
 
 
-  if(thisN == 208){  Qsq_v.push_back(thisQsq_v); Asym_v.push_back(thisAsym_v/1000);  Lab_v.push_back(thisLab_v); Rate_v.push_back(thisRate_v);  }
+  if(thisN > 200){  Qsq_v.push_back(thisQsq_v); Asym_v.push_back(thisAsym_v/1000);  Lab_v.push_back(thisLab_v); Rate_v.push_back(thisRate);  }
 
   }
 
@@ -198,7 +198,7 @@ double thisEvt;
  //simulation
  for(int k = 0; k < Qsq.size(); k++){ qsq[1]->Fill(Qsq[k],Rate[k]); lab[1]->Fill(Lab[k],Rate[k]); asym[1]->Fill(Asym[k],Rate[k]); hmom[1]->Fill(Mom[k],Rate[k]); } 
  //simulation vertex 
- for(int m = 0; m < Qsq_v.size();m++){ qsq_v->Fill(Qsq_v[m],Rate[m]); asym_v->Fill(Asym_v[m],Rate[m]); lab_v->Fill(Lab_v[m],Rate[m]);      }
+ for(int m = 0; m < Qsq_v.size();m++){ qsq_v->Fill(Qsq_v[m],Rate_v[m]); asym_v->Fill(Asym_v[m],Rate_v[m]); lab_v->Fill(Lab_v[m],Rate_v[m]);      }
 
 
 
