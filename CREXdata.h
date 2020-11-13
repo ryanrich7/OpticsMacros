@@ -10,11 +10,17 @@ double thisEnergy, thisAngle, thisXS, thisAsym;
 void LoadTable(string, int);
 double Interpolate(double , double, int , int);
 
+//For Ca48 or Ca40 
+//E_min = 500, E_step = 50, n_E = 62, n_Th = 141
+
 //This is MeV -- This is for lead
 int E_min = 550;
-int E_step = 500;
+int E_step = 50;
 int n_E = 14;
 int n_Th = 66;
+
+
+
 
 vector<double> energy;
 vector<double> angle;
