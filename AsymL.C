@@ -9,7 +9,7 @@
 
 //Run number, sept scan(0.0 - nominal), ADC, central angle for data, dp cut off,  offset in degrees(1 clearly no shift)
 
-void AsymL(int run,double sept,double ADC,double th0, double dp, double off){
+void AsymL(int run,double sept,double ADC,double th0, double dp, double off,double Ebeam){
 
 //gStyle->SetOptStat(111100);
 
@@ -105,7 +105,7 @@ double thisEvt;
       thisPdat *= scale;
    int thisevent = (int) thisEvt;
   
-   if(thisu1 == 1 && thisv1 == 1 && thisu2 == 1 && thisv2 == 1 && thisADC > ADC && abs(thisThdat)<0.08 && abs(thisPhdat)<0.05 && thisPdat >  0.9534*0.96 && thisPdat < 0.9534*1.002 && ((thisevent&2)==2)  ){
+   if(thisu1 == 1 && thisv1 == 1 && thisu2 == 1 && thisv2 == 1 && thisADC > ADC && abs(thisThdat)<0.08 && abs(thisPhdat)<0.05 && thisPdat >  Ebeam*0.96 && thisPdat < Ebeam*1.002 && ((thisevent&2)==2)  ){
   
  
       thisCosAngdat = (cth0-thisPhdat*sth0)/(TMath::Sqrt(1+thisThdat*thisThdat+thisPhdat*thisPhdat));
@@ -115,7 +115,7 @@ double thisEvt;
      //  std::cout << thisAngdat << std::endl;     
       
       //Using a hardcoded beam energy -- run dependent, yes? --Beam Energy 953.4
-       thisQsqdat = 2*0.9534*thisPdat*(1-thisCosAngdat);
+       thisQsqdat = 2*Ebeam*thisPdat*(1-thisCosAngdat);
        
        thisAsymdat = 1e6*Interpolate(thisPdat*1000,thisAngdat,0,1);
   
@@ -176,7 +176,7 @@ double thisEvt;
   thisAng1 = thisAng;
 
   //Now with this, compute Q^2 and Asymmetry
-  thisQsq = 2*0.9534*(thismom/1000)*(1-TMath::Cos(thisAng1*d2r));
+  thisQsq = 2*Ebeam*(thismom/1000)*(1-TMath::Cos(thisAng1*d2r));
   thisAsym = 1e6*Interpolate(thismom,thisAng1,0,1);
 
   Rate.push_back(thisRate); Qsq.push_back(thisQsq);

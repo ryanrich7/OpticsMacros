@@ -9,7 +9,7 @@
 
 //Run number, sept scan(0.0 - nominal), ADC, central angle for data, dp cut off,  offset in degrees(1 clearly no shift)
 
-void AsymR(int run,double sept,double ADC,double th0, double dp, double off){
+void AsymR(int run, double sept,double ADC,double th0, double dp, double off, double Ebeam){
 
 //gStyle->SetOptStat(111100);
 
@@ -105,7 +105,7 @@ double thisEvt;
       thisPdat *= scale;
    int thisevent = (int) thisEvt;
   
-   if(thisu1 == 1 && thisv1 == 1 && thisu2 == 1 && thisv2 == 1 && thisADC > ADC && abs(thisThdat)<0.08 && abs(thisPhdat)<0.05 && thisPdat >  0.9534*0.96 && thisPdat < 0.9534*1.002 && ((thisevent&2)==2)  ){
+   if(thisu1 == 1 && thisv1 == 1 && thisu2 == 1 && thisv2 == 1 && thisADC > ADC && abs(thisThdat)<0.08 && abs(thisPhdat)<0.05 && thisPdat >  Ebeam*0.96 && thisPdat < Ebeam*1.002 && ((thisevent&2)==2)  ){
   
  
       thisCosAngdat = (cth0+thisPhdat*sth0)/(TMath::Sqrt(1+thisThdat*thisThdat+thisPhdat*thisPhdat));
@@ -115,7 +115,7 @@ double thisEvt;
      //  std::cout << thisAngdat << std::endl;     
       
       //Using a hardcoded beam energy -- run dependent, yes? --Beam Energy 953.4
-       thisQsqdat = 2*0.9534*thisPdat*(1-thisCosAngdat);
+       thisQsqdat = 2*Ebema*thisPdat*(1-thisCosAngdat);
        
        thisAsymdat = 1e6*Interpolate(thisPdat*1000,thisAngdat,0,1);
   
@@ -167,7 +167,7 @@ double thisEvt;
   //This has momentum cut -- needs to be evaluated
   if( thisXvdc!=-333. && CollimatorR(thisXcol,thisYcol) && UpPlane(thisxu1,thisyu1,thisxu2,thisyu2,0) &&
   DownPlane(thisxd1,thisyd1,thisxd2,thisyd2,thisxd3,thisyd3,thisxd4,thisyd4,thisxd5,thisyd5,thisxd6,thisyd6,thisxd7,thisyd7,thisxd8,thisyd8,thisxd9,thisyd9,0) && ((thismom -50*thisTh) > dp) ){
- thisCosAng = (cthsim+thisPh*sthsim)/TMath::Sqrt(1+thisPh*thisPh+thisTh*thisTh);  
+ thisCosAng = (cthsim-thisPh*sthsim)/TMath::Sqrt(1+thisPh*thisPh+thisTh*thisTh);  
   
   //We will have to be careful here  
   thisAng = r2d*TMath::ACos(thisCosAng);
@@ -176,7 +176,7 @@ double thisEvt;
 
 
   //Now with this, compute Q^2 and Asymmetry
-  thisQsq = 2*0.9534*(thismom/1000)*(1-TMath::Cos(thisAng1*d2r));
+  thisQsq = 2*Ebeam*(thismom/1000)*(1-TMath::Cos(thisAng1*d2r));
   thisAsym = 1e6*Interpolate(thismom,thisAng1,0,1);
 
   // std::cout << thisAng1 << "   " << thisQsq << "   " << thisAsym << std::endl;
