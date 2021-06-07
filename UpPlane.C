@@ -20,10 +20,10 @@ double y3  = -0.0275;
 double y4 = 0.0272;
 
 
-if( xup1 < x1 ) return false; if( xup1 > x2 ) return false;
+if( sign*xup1 < x1 ) return false; if( sign*xup1 > x2 ) return false;
 if( yup1 < y1 ) return false; if( yup1 > y2 ) return false;
 
-if( xup2 < x3 ) return false; if( xup2 > x4 ) return false;
+if( sign*xup2 < x3 ) return false; if( sign*xup2 > x4 ) return false;
 if( yup2 < y3 ) return false; if( yup2 > y4 ) return false;
 
 
